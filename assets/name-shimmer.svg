@@ -1,127 +1,111 @@
 
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="1000" height="190"
-     viewBox="0 0 1000 190">
+     width="1000" height="180"
+     viewBox="0 0 1000 180">
 
   <defs>
-    <!-- Premium gradient -->
-    <linearGradient id="textGradient"
-      x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="neon">
       <stop offset="0%" stop-color="#38BDF8"/>
-      <stop offset="40%" stop-color="#FFFFFF"/>
-      <stop offset="70%" stop-color="#A78BFA"/>
-      <stop offset="100%" stop-color="#60A5FA"/>
+      <stop offset="35%" stop-color="#818CF8"/>
+      <stop offset="60%" stop-color="#FFFFFF"/>
+      <stop offset="85%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
     </linearGradient>
 
-    <!-- Moving light -->
+    <filter id="glow" x="-30%" y="-100%"
+            width="160%" height="300%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+
     <linearGradient id="shine"
       gradientUnits="userSpaceOnUse"
-      x1="-300" y1="0"
-      x2="0" y2="0">
-
+      x1="-200" y1="0" x2="100" y2="0">
       <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
-      <stop offset="40%" stop-color="#FFFFFF" stop-opacity="0.1"/>
-      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="1"/>
-      <stop offset="60%" stop-color="#93C5FD" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
       <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
 
       <animate attributeName="x1"
-        from="-500" to="1500"
-        dur="4s" repeatCount="indefinite"/>
-
+        from="-300" to="1300" dur="3s"
+        repeatCount="indefinite"/>
       <animate attributeName="x2"
-        from="-200" to="1800"
-        dur="4s" repeatCount="indefinite"/>
+        from="0" to="1600" dur="3s"
+        repeatCount="indefinite"/>
     </linearGradient>
 
-    <!-- Text mask -->
-    <mask id="letters">
+    <mask id="textMask">
       <rect width="100%" height="100%" fill="black"/>
-      <text x="500" y="115"
-        text-anchor="middle"
-        font-family="Arial, sans-serif"
-        font-size="86"
+      <text x="0" y="105"
+        font-family="Arial"
+        font-size="76"
         font-weight="900"
-        letter-spacing="5"
+        letter-spacing="4"
         fill="white">HANH NGUYEN</text>
     </mask>
 
-    <!-- Glow -->
-    <filter id="glow"
-      x="-40%" y="-100%"
-      width="180%" height="300%">
-      <feGaussianBlur stdDeviation="7"/>
-    </filter>
+    <clipPath id="screen">
+      <rect width="1000" height="180"/>
+    </clipPath>
   </defs>
 
-  <!-- Outer glow -->
-  <text x="500" y="115"
-    text-anchor="middle"
-    font-family="Arial, sans-serif"
-    font-size="86"
-    font-weight="900"
-    letter-spacing="5"
-    fill="#60A5FA"
-    opacity="0.8"
-    filter="url(#glow)">HANH NGUYEN</text>
+  <g clip-path="url(#screen)">
 
-  <!-- Main text -->
-  <text x="500" y="115"
-    text-anchor="middle"
-    font-family="Arial, sans-serif"
-    font-size="86"
-    font-weight="900"
-    letter-spacing="5"
-    fill="url(#textGradient)">HANH NGUYEN</text>
-
-  <!-- Shimmer overlay -->
-  <rect width="1000" height="190"
-    fill="url(#shine)"
-    mask="url(#letters)"/>
-
-  <!-- Sparkles -->
-  <g fill="#FFFFFF">
-    <circle cx="150" cy="70" r="3">
-      <animate attributeName="opacity"
-        values="0;1;0" dur="1.8s"
+    <!-- Moving text -->
+    <g>
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        from="-500 0"
+        to="1000 0"
+        dur="7s"
         repeatCount="indefinite"/>
-    </circle>
 
-    <circle cx="840" cy="65" r="3">
-      <animate attributeName="opacity"
-        values="0;1;0" dur="2.3s"
-        repeatCount="indefinite"/>
-    </circle>
+      <!-- Neon glow -->
+      <text x="0" y="105"
+        font-family="Arial"
+        font-size="76"
+        font-weight="900"
+        letter-spacing="4"
+        fill="#60A5FA"
+        filter="url(#glow)">
+        HANH NGUYEN
+      </text>
 
-    <circle cx="750" cy="140" r="2.5">
-      <animate attributeName="opacity"
-        values="0;1;0" dur="1.5s"
-        repeatCount="indefinite"/>
-    </circle>
+      <!-- Main text -->
+      <text x="0" y="105"
+        font-family="Arial"
+        font-size="76"
+        font-weight="900"
+        letter-spacing="4"
+        fill="url(#neon)">
+        HANH NGUYEN
+      </text>
 
-    <circle cx="250" cy="145" r="2">
-      <animate attributeName="opacity"
-        values="0;1;0" dur="2s"
-        repeatCount="indefinite"/>
-    </circle>
+      <!-- Moving shine -->
+      <rect x="0" y="0" width="500" height="180"
+        fill="url(#shine)"
+        mask="url(#textMask)"/>
+    </g>
+
+    <!-- Flying particles -->
+    <g fill="#FFFFFF">
+      <circle cy="45" r="3">
+        <animate attributeName="cx"
+          from="0" to="1000" dur="4s"
+          repeatCount="indefinite"/>
+        <animate attributeName="opacity"
+          values="0;1;0" dur="4s"
+          repeatCount="indefinite"/>
+      </circle>
+
+      <circle cy="140" r="2">
+        <animate attributeName="cx"
+          from="1000" to="0" dur="5s"
+          repeatCount="indefinite"/>
+        <animate attributeName="opacity"
+          values="0;1;0" dur="5s"
+          repeatCount="indefinite"/>
+      </circle>
+    </g>
+
   </g>
-
-  <!-- Star effects -->
-  <g stroke="#93C5FD"
-     stroke-width="2.5"
-     stroke-linecap="round">
-
-    <path d="M120 100 V120 M110 110 H130">
-      <animate attributeName="opacity"
-        values="0.1;1;0.1"
-        dur="2s" repeatCount="indefinite"/>
-    </path>
-
-    <path d="M880 100 V120 M870 110 H890">
-      <animate attributeName="opacity"
-        values="0.1;1;0.1"
-        dur="1.7s" repeatCount="indefinite"/>
-    </path>
-  </g>
-
 </svg>
