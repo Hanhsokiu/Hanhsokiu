@@ -1,197 +1,181 @@
+
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="1400"
-     height="220"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1400" height="220"
      viewBox="0 0 1400 220">
 
   <defs>
-    <!-- Gradient chữ -->
-    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#60a5fa">
+    <!-- Gradient neon đổi màu -->
+    <linearGradient id="neon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8">
         <animate attributeName="stop-color"
-                 values="#60a5fa;#a78bfa;#f472b6;#38bdf8;#60a5fa"
-                 dur="8s"
-                 repeatCount="indefinite"/>
+          values="#38bdf8;#818cf8;#22d3ee;#38bdf8"
+          dur="8s" repeatCount="indefinite"/>
       </stop>
+
       <stop offset="50%" stop-color="#c084fc">
         <animate attributeName="stop-color"
-                 values="#c084fc;#f9a8d4;#93c5fd;#c084fc"
-                 dur="8s"
-                 repeatCount="indefinite"/>
+          values="#c084fc;#f0abfc;#a78bfa;#c084fc"
+          dur="8s" repeatCount="indefinite"/>
       </stop>
+
       <stop offset="100%" stop-color="#22d3ee">
         <animate attributeName="stop-color"
-                 values="#22d3ee;#60a5fa;#e879f9;#22d3ee"
-                 dur="8s"
-                 repeatCount="indefinite"/>
+          values="#22d3ee;#60a5fa;#f472b6;#22d3ee"
+          dur="8s" repeatCount="indefinite"/>
       </stop>
-
-      <animate attributeName="x1"
-               values="-20%;120%;-20%"
-               dur="10s"
-               repeatCount="indefinite"/>
-      <animate attributeName="x2"
-               values="80%;220%;80%"
-               dur="10s"
-               repeatCount="indefinite"/>
     </linearGradient>
 
-    <!-- Glow mềm -->
-    <filter id="softGlow" x="-40%" y="-60%" width="180%" height="240%">
-      <feGaussianBlur stdDeviation="4" result="blur1"/>
-      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur2"/>
-      <feMerge>
-        <feMergeNode in="blur2"/>
-        <feMergeNode in="blur1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <!-- Hiệu ứng glow -->
+    <filter id="glow"
+            x="-12%" y="-40%"
+            width="124%" height="180%">
+      <feGaussianBlur stdDeviation="6"/>
     </filter>
 
-    <!-- Shimmer quét qua chữ -->
-    <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+    <!-- Ánh sáng quét qua chữ -->
+    <linearGradient id="shine"
+                    x1="0%" y1="0%"
+                    x2="100%" y2="0%">
       <stop offset="0%" stop-color="white" stop-opacity="0"/>
-      <stop offset="45%" stop-color="white" stop-opacity="0"/>
-      <stop offset="50%" stop-color="white" stop-opacity="0.95"/>
-      <stop offset="55%" stop-color="white" stop-opacity="0"/>
+      <stop offset="38%" stop-color="white" stop-opacity="0"/>
+      <stop offset="50%" stop-color="white" stop-opacity="0.92"/>
+      <stop offset="62%" stop-color="white" stop-opacity="0"/>
       <stop offset="100%" stop-color="white" stop-opacity="0"/>
     </linearGradient>
 
-    <clipPath id="clipText">
-      <text x="0" y="132"
-            font-family="Segoe UI, Arial, Helvetica, sans-serif"
-            font-size="50"
-            font-weight="800"
-            letter-spacing="1.2">
-        👋 Hey there! Welcome to my little corner of GitHub!
-      </text>
+    <!-- Nội dung chữ -->
+    <text id="messageText"
+          x="0" y="132"
+          font-family="Segoe UI, Arial, sans-serif"
+          font-size="50"
+          font-weight="800"
+          textLength="1300"
+          lengthAdjust="spacingAndGlyphs">👋 Hey there! Welcome to my little corner of GitHub!</text>
+
+    <!-- Giới hạn vùng ánh sáng trên chữ -->
+    <clipPath id="letters"
+              clipPathUnits="userSpaceOnUse">
+      <use xlink:href="#messageText"/>
     </clipPath>
 
-    <clipPath id="viewport">
-      <rect x="0" y="0" width="1400" height="220"/>
+    <!-- Giới hạn khung hình -->
+    <clipPath id="stage">
+      <rect width="1400" height="220"/>
     </clipPath>
+
+    <!-- Ngôi sao 4 cánh -->
+    <path id="star"
+          d="M0,-11 L2.5,-2.5 L11,0 L2.5,2.5
+             L0,11 L-2.5,2.5 L-11,0 L-2.5,-2.5 Z"
+          fill="white"/>
+
+    <!-- Một cụm chữ hoàn chỉnh -->
+    <g id="message">
+
+      <!-- Glow nền -->
+      <use xlink:href="#messageText"
+           fill="#a78bfa"
+           opacity="0.70"
+           filter="url(#glow)"/>
+
+      <!-- Chữ chính -->
+      <use xlink:href="#messageText"
+           fill="url(#neon)"/>
+
+      <!-- Hiệu ứng shimmer quét phải sang trái -->
+      <g clip-path="url(#letters)">
+        <rect x="1400"
+              y="53"
+              width="360"
+              height="115"
+              fill="url(#shine)"
+              transform="skewX(-14)">
+          <animate
+            attributeName="x"
+            values="1400;-450"
+            dur="5s"
+            calcMode="linear"
+            repeatCount="indefinite"/>
+        </rect>
+      </g>
+
+      <!-- Sao lấp lánh thứ nhất -->
+      <g transform="translate(120 60)">
+        <g>
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            values="0.3;1.1;0.3"
+            dur="2.4s"
+            repeatCount="indefinite"/>
+          <animate
+            attributeName="opacity"
+            values="0.15;1;0.15"
+            dur="2.4s"
+            repeatCount="indefinite"/>
+          <use xlink:href="#star"/>
+        </g>
+      </g>
+
+      <!-- Sao lấp lánh thứ hai -->
+      <g transform="translate(570 166)">
+        <g>
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            values="0.2;0.9;0.2"
+            dur="3s"
+            begin="0.7s"
+            repeatCount="indefinite"/>
+          <animate
+            attributeName="opacity"
+            values="0.1;0.95;0.1"
+            dur="3s"
+            begin="0.7s"
+            repeatCount="indefinite"/>
+          <use xlink:href="#star"/>
+        </g>
+      </g>
+
+      <!-- Sao lấp lánh thứ ba -->
+      <g transform="translate(1060 57)">
+        <g>
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            values="0.25;1;0.25"
+            dur="2.7s"
+            begin="1.2s"
+            repeatCount="indefinite"/>
+          <animate
+            attributeName="opacity"
+            values="0.1;1;0.1"
+            dur="2.7s"
+            begin="1.2s"
+            repeatCount="indefinite"/>
+          <use xlink:href="#star"/>
+        </g>
+      </g>
+
+    </g>
   </defs>
 
-  <g clip-path="url(#viewport)">
-    <!-- Cả cụm chữ chạy ngang -->
+  <!-- Hai bản sao tạo chuyển động liên tục -->
+  <g clip-path="url(#stage)">
     <g>
       <animateTransform
         attributeName="transform"
         type="translate"
-        values="-1220 0; 1400 0"
+        from="0 0"
+        to="-1510 0"
         dur="14s"
-        repeatCount="indefinite"
-        calcMode="spline"
-        keyTimes="0;1"
-        keySplines="0.42 0 0.58 1"/>
+        calcMode="linear"
+        repeatCount="indefinite"/>
 
-      <!-- Glow nền -->
-      <text x="0" y="132"
-            font-family="Segoe UI, Arial, Helvetica, sans-serif"
-            font-size="50"
-            font-weight="800"
-            letter-spacing="1.2"
-            fill="url(#textGradient)"
-            filter="url(#softGlow)"
-            opacity="0.45">
-        👋 Hey there! Welcome to my little corner of GitHub!
-      </text>
-
-      <!-- Chữ chính -->
-      <text x="0" y="132"
-            font-family="Segoe UI, Arial, Helvetica, sans-serif"
-            font-size="50"
-            font-weight="800"
-            letter-spacing="1.2"
-            fill="url(#textGradient)">
-        👋 Hey there! Welcome to my little corner of GitHub!
-      </text>
-
-      <!-- Viền sáng nhẹ -->
-      <text x="0" y="132"
-            font-family="Segoe UI, Arial, Helvetica, sans-serif"
-            font-size="50"
-            font-weight="800"
-            letter-spacing="1.2"
-            fill="none"
-            stroke="rgba(255,255,255,0.7)"
-            stroke-width="0.8"
-            opacity="0.7">
-        👋 Hey there! Welcome to my little corner of GitHub!
-      </text>
-
-      <!-- Dải sáng quét -->
-      <g clip-path="url(#clipText)">
-        <rect x="-260" y="35" width="240" height="160"
-              fill="url(#shimmerGradient)"
-              transform="skewX(-20)">
-          <animate attributeName="x"
-                   values="-320;1150;-320"
-                   dur="4.8s"
-                   repeatCount="indefinite"/>
-        </rect>
-      </g>
-
-      <!-- Sparkles -->
-      <g opacity="0.95">
-        <!-- sparkle 1 -->
-        <g transform="translate(40 58)">
-          <animateTransform attributeName="transform"
-                            type="scale"
-                            values="0.6;1.15;0.6"
-                            dur="1.8s"
-                            repeatCount="indefinite"/>
-          <animate attributeName="opacity"
-                   values="0.2;1;0.2"
-                   dur="1.8s"
-                   repeatCount="indefinite"/>
-          <path d="M0 -9 L2.5 -2.5 L9 0 L2.5 2.5 L0 9 L-2.5 2.5 L-9 0 L-2.5 -2.5 Z"
-                fill="#ffffff"/>
-        </g>
-
-        <!-- sparkle 2 -->
-        <g transform="translate(420 48)">
-          <animateTransform attributeName="transform"
-                            type="scale"
-                            values="0.4;1;0.4"
-                            dur="2.2s"
-                            repeatCount="indefinite"/>
-          <animate attributeName="opacity"
-                   values="0.1;0.95;0.1"
-                   dur="2.2s"
-                   repeatCount="indefinite"/>
-          <path d="M0 -7 L2 -2 L7 0 L2 2 L0 7 L-2 2 L-7 0 L-2 -2 Z"
-                fill="#ffffff"/>
-        </g>
-
-        <!-- sparkle 3 -->
-        <g transform="translate(760 168)">
-          <animateTransform attributeName="transform"
-                            type="scale"
-                            values="0.5;1.2;0.5"
-                            dur="2s"
-                            repeatCount="indefinite"/>
-          <animate attributeName="opacity"
-                   values="0.15;1;0.15"
-                   dur="2s"
-                   repeatCount="indefinite"/>
-          <path d="M0 -8 L2.2 -2.2 L8 0 L2.2 2.2 L0 8 L-2.2 2.2 L-8 0 L-2.2 -2.2 Z"
-                fill="#ffffff"/>
-        </g>
-
-        <!-- sparkle 4 -->
-        <g transform="translate(1110 60)">
-          <animateTransform attributeName="transform"
-                            type="scale"
-                            values="0.45;1.1;0.45"
-                            dur="2.4s"
-                            repeatCount="indefinite"/>
-          <animate attributeName="opacity"
-                   values="0.2;1;0.2"
-                   dur="2.4s"
-                   repeatCount="indefinite"/>
-          <path d="M0 -8 L2 -2 L8 0 L2 2 L0 8 L-2 2 L-8 0 L-2 -2 Z"
-                fill="#ffffff"/>
-        </g>
-      </g>
+      <use xlink:href="#message" x="0"/>
+      <use xlink:href="#message" x="1510"/>
     </g>
   </g>
+
 </svg>
