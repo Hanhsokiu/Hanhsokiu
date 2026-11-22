@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
      width="1200" height="180" viewBox="0 0 1200 180"
-     role="img" aria-label="HANH NGUYEN - chữ chạy neon lấp lánh">
+     role="img" aria-label="👋 Hey there! Welcome to my little corner of GitHub! - chữ chạy neon lấp lánh">
   <defs>
     <!-- Màu chuyển mềm, có biến đổi sắc độ liên tục -->
     <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -47,7 +47,7 @@
     <clipPath id="letterMask">
       <text x="0" y="115" font-family="Arial, Helvetica, sans-serif"
             font-size="76" font-weight="900" letter-spacing="5"
-            textLength="660" lengthAdjust="spacingAndGlyphs">HANH NGUYEN</text>
+            textLength="660" lengthAdjust="spacingAndGlyphs">👋 Hey there! Welcome to my little corner of GitHub!</text>
     </clipPath>
 
     <!-- Ngôi sao 4 cánh, dùng lại ở nhiều vị trí -->
@@ -85,7 +85,7 @@
             font-size="76" font-weight="900" letter-spacing="5"
             textLength="660" lengthAdjust="spacingAndGlyphs"
             fill="url(#textGradient)" stroke="#d8edff" stroke-opacity="0.33"
-            stroke-width="0.8" paint-order="stroke fill">HANH NGUYEN</text>
+            stroke-width="0.8" paint-order="stroke fill">👋 Hey there! Welcome to my little corner of GitHub!</text>
 
       <!-- Dải ánh kim nghiêng lướt qua chữ, được cắt theo hình chữ -->
       <g clip-path="url(#letterMask)">
